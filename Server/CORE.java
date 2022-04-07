@@ -18,7 +18,11 @@ public class CORE {
     public static void broadcastMessage(String message) {
         System.out.println("About to broadcast....");
         for (PrintStream ps : CORE.theClientStreams) {
-            ps.println(message);
+            if (message.equals("/quit")) {
+                removeClientThreadPrintStream(ps);
+            } else {
+                ps.println(message);
+            }
         }
     }
 }

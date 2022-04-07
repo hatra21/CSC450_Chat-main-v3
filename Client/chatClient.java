@@ -20,7 +20,7 @@ public class chatClient {
                     line = clientInput.nextLine();
                     if (line.equals("/quit")) {
                         System.out.println("A client has left the chat.");
-                        CORE.removeClientThreadPrintStream(clientOutput);
+                        // CORE.removeClientThreadPrintStream(clientOutput);
 
                         stopThread();
                         // stop();
