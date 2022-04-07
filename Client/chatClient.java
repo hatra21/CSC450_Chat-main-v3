@@ -10,13 +10,28 @@ public class chatClient {
         System.out.println(question);
         Scanner localInput = new Scanner(System.in);
         PrintStream clientOutput = new PrintStream(s.getOutputStream());
+
         Thread lt = new Thread() {
+            Boolean runningThread = true;
+
             public void run() {
                 String line;
-                while (true) {
+                while (runningThread) {
                     line = clientInput.nextLine();
-                    System.out.println(line);
+                    if (line.equals("/quit")) {
+                        System.out.println("A client has left the chat.");
+                        CORE.removeClientThreadPrintStream(clientOutput);
+
+                        stopThread();
+                        // stop();
+                    } else {
+                        System.out.println(line);
+                    }
                 }
+            }
+
+            public void stopThread() {
+                runningThread = false;
             }
         };
 

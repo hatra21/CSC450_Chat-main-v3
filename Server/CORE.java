@@ -9,16 +9,16 @@ public class CORE {
         CORE.theClientStreams.add(ps);
     }
 
+    public static void removeClientThreadPrintStream(PrintStream ps) {
+        System.out.println("removing client thread");
+        ps.close();
+        CORE.theClientStreams.remove(ps);
+    }
+
     public static void broadcastMessage(String message) {
         System.out.println("About to broadcast....");
         for (PrintStream ps : CORE.theClientStreams) {
-            if (message == "/quit") {
-                ps.close();
-                theClientStreams.remove(ps);
-                System.out.println("A client has left the chat.");
-            } else {
-                ps.println(message);
-            }
+            ps.println(message);
         }
     }
 }
