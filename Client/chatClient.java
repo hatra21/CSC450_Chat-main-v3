@@ -18,28 +18,33 @@ public class chatClient {
                 String line;
                 while (runningThread) {
                     line = clientInput.nextLine();
-                    if (line.equals("/quit")) {
-                        System.out.println("A client has left the chat.");
-                        // CORE.removeClientThreadPrintStream(clientOutput);
+                    System.out.println(line);
 
-                        stopThread();
-                        // stop();
-                    } else {
-                        System.out.println(line);
-                    }
+                    // if (line.equals("/quit")) {
+                    // System.out.println("A client has left the chat.");
+
+                    // runningThread = false;
+                    // } else {
+                    // System.out.println(line);
                 }
-            }
-
-            public void stopThread() {
-                runningThread = false;
             }
         };
 
         lt.start();
 
+        String line;
+
         while (true) {
-            clientOutput.println(localInput.nextLine());
+            line = localInput.nextLine();
+            clientOutput.println(line);
+            if (line.equals("/quit")) {
+                break;
+            }
+            // clientOutput.println(localInput.nextLine());
         }
+        System.out.println("A client has left the chat.");
+        // lt.interrupt();
+        System.exit(0);
 
     }
 }

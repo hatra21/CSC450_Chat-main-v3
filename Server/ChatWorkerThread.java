@@ -32,6 +32,11 @@ public class ChatWorkerThread extends Thread {
         String message;
         while (true) {
             message = clientInput.nextLine();
+            if (message.equals("/quit")) {
+                CORE.broadcastMessage(name + "has left the server.");
+                CORE.removeClientThreadPrintStream(this.clientOutput);
+                break;
+            }
             CORE.broadcastMessage(message);
         }
     }

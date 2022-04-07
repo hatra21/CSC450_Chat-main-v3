@@ -9,7 +9,7 @@ public class CORE {
         CORE.theClientStreams.add(ps);
     }
 
-    public static void removeClientThreadPrintStream(PrintStream ps) {
+    public static synchronized void removeClientThreadPrintStream(PrintStream ps) {
         System.out.println("removing client thread");
         ps.close();
         CORE.theClientStreams.remove(ps);
@@ -18,11 +18,12 @@ public class CORE {
     public static void broadcastMessage(String message) {
         System.out.println("About to broadcast....");
         for (PrintStream ps : CORE.theClientStreams) {
-            if (message.equals("/quit")) {
-                removeClientThreadPrintStream(ps);
-            } else {
-                ps.println(message);
-            }
+            ps.println(message);
+            // if (message.equals("/quit")) {
+            // removeClientThreadPrintStream(ps);
+            // } else {
+            // ps.println(message);
+            // }
         }
     }
 }
