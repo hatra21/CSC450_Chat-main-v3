@@ -13,7 +13,8 @@ public class ChatWorkerThread extends Thread {
             this.theClientSocket = theClientSocket;
             this.clientOutput = new PrintStream(this.theClientSocket.getOutputStream());
             // System.out.println("About to add a printstream");
-            CORE.addClientThreadPrintStream(this.clientOutput);
+            // CORE.addClientThreadPrintStream(this.clientOutput);
+            CORE.changeCLientThreadPrintStream(this.clientOutput, "add");
 
             this.clientInput = new Scanner(this.theClientSocket.getInputStream());
         } catch (Exception e) {
@@ -34,7 +35,8 @@ public class ChatWorkerThread extends Thread {
             message = clientInput.nextLine();
             if (message.equals("/quit")) {
                 CORE.broadcastMessage(name + "has left the server.");
-                CORE.removeClientThreadPrintStream(this.clientOutput);
+                // CORE.removeClientThreadPrintStream(this.clientOutput);
+                CORE.changeCLientThreadPrintStream(this.clientOutput, "remove");
                 break;
             }
             CORE.broadcastMessage(message);

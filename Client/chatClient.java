@@ -11,6 +11,13 @@ public class chatClient {
         Scanner localInput = new Scanner(System.in);
         PrintStream clientOutput = new PrintStream(s.getOutputStream());
 
+        // File transferring
+        byte b[] = new byte[1024];
+        InputStream inputStream = s.getInputStream();
+        FileOutputStream outputStream = new FileOutputStream("C:\\outputtext.txt");
+        inputStream.read(b, 0, b.length);
+        outputStream.write(b, 0, b.length);
+
         Thread lt = new Thread() {
             Boolean runningThread = true;
 
@@ -35,6 +42,7 @@ public class chatClient {
         String line;
 
         while (true) {
+
             line = localInput.nextLine();
             clientOutput.println(line);
             if (line.equals("/quit")) {
